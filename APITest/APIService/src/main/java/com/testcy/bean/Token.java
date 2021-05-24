@@ -8,7 +8,7 @@ import lombok.ToString;
 public class Token {
 
     private Integer id;
-    private String username;
+    private String userName;
     private String token;
 
 }

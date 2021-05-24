@@ -25,4 +25,12 @@ public class TokenService {
         return token;
     }
 
+    public void addToken(Token token){
+        tokenMapper.insert(token);
+
+    }
+
+    public void addTokenByJson(Token token) {
+         tokenMapper.insertByJson(token);
+    }
 }

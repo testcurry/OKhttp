@@ -9,8 +9,8 @@ import java.io.*;
 
 public class OkHttpTest {
 
-    private static final MediaType JSON_MEDIA_TYPE=MediaType.get("application/json;charset=utf-8");
-    private OkHttpClient client= new OkHttpClient();
+    private static final MediaType JSON_MEDIA_TYPE = MediaType.get("application/json;charset=utf-8");
+    private OkHttpClient client = new OkHttpClient();
 
     //get请求
     @Test
@@ -30,7 +30,7 @@ public class OkHttpTest {
                 .url("http://localhost:8080/token")
                 .get()
                 .build();
-       client.newCall(request).enqueue(new Callback() {
+        client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 System.out.println(e.getCause());
@@ -48,8 +48,8 @@ public class OkHttpTest {
     @Test
     public void testPostJson() throws IOException {
 
-        String url="http://localhost:8080/token";
-        String jsonStr = JsonUtils.readFile("src/main/resources/demoJsonG.json");
+        String url = "http://localhost:8080/token";
+        String jsonStr = "{\"userName\":\"Jack\",\"token\":\"Jack3432rtesrdf\"}";
         RequestBody requestBody = RequestBody.create(jsonStr, JSON_MEDIA_TYPE);
         Request requestPost = new Request.Builder()
                 .url(url)
@@ -63,12 +63,13 @@ public class OkHttpTest {
     //post请求 x-form-www-urlencoded
     @Test
     public void testPostForm() throws IOException {
-        String url="http://localhost:8080/token/form";
+        String url = "http://localhost:8080/token/form";
         FormBody formBody = new FormBody.Builder()
                 .add("userName", "test01")
-                .add("token", "testcy1234")
+                .add("token", "testcy1234testcy")
                 .build();
         Request request = new Request.Builder()
+                .url(url)
                 .post(formBody)
                 .build();
         Response response = client.newCall(request).execute();
@@ -79,13 +80,13 @@ public class OkHttpTest {
     //文件上传
     @Test
     public void testUpload() throws IOException {
-        String url="http://localhost:8080/file/upload";
-        File file = new File(".//upload//devops.jpg");
+        String url = "http://localhost:8080/file/upload";
+        File file = new File("src/main/resources/devops.jpg");
         MultipartBody multipartBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("file",
                         file.getName(),
-                        RequestBody.create(file,MediaType.parse("file/*")))
+                        RequestBody.create(file, MediaType.parse("file/*")))
                 .addFormDataPart("userName", "testcy")
                 .addFormDataPart("token", "test235234")
                 .build();
@@ -107,7 +108,7 @@ public class OkHttpTest {
     //文件下载
     @Test
     public void testDownload() throws IOException {
-        String filePath = ".//download";
+        String filePath = ".//download//";
         String url = "http://localhost:8080/file/download";
         Request request = new Request.Builder()
                 .url(url)
@@ -115,19 +116,19 @@ public class OkHttpTest {
                 .build();
         Call call = client.newCall(request);
         Response response = call.execute();
-        String disposition = response.header("Content-Disposition").toString();
-        String fileName = disposition.split(";")[0];
+        String disposition = response.header("Content-Disposition");
+        String fileName = disposition.split(";")[1];
         ResponseBody body = response.body();
         InputStream inputStream = body.byteStream();
         File dir = new File(filePath);
-        if (!dir.exists()){
+        if (!dir.exists()) {
             dir.mkdir();
         }
-        File file = new File(filePath + fileName);
+        File file = new File(filePath+fileName);
         OutputStream outputStream = new FileOutputStream(file);
         int len;
         byte[] buffer = new byte[1024];
-        while ((len=inputStream.read(buffer))!=-1){
+        while ((len = inputStream.read(buffer)) != -1) {
             outputStream.write(buffer, 0, len);
         }
         outputStream.flush();
@@ -135,7 +136,6 @@ public class OkHttpTest {
         outputStream.close();
 
     }
-
 
 
 }

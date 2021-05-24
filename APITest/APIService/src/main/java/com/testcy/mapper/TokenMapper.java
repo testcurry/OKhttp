@@ -1,6 +1,7 @@
 package com.testcy.mapper;
 
 import com.testcy.bean.Token;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -14,5 +15,11 @@ public interface TokenMapper {
 
     @Select("select * from token where username=#{username}")
     public Token queryByUserName(String userName);
+
+    @Insert("insert into token(`userName`,`token`) values(#{userName},#{token})")
+    public void insert(Token token);
+
+    @Insert("insert into token(`userName`,`token`) values(#{userName},#{token})")
+    public void insertByJson(Token token);
 
 }

@@ -4,10 +4,18 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.EntityBuilder;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.conn.params.ConnRoutePNames;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.FormBodyPart;
+import org.apache.http.entity.mime.FormBodyPartBuilder;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -18,6 +26,7 @@ import org.apache.http.util.EntityUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -28,7 +37,7 @@ public class HttpClientTest {
 
     private static CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 
-    @BeforeEach
+//    @BeforeEach
     public void init() {
 
         System.out.println("....");
@@ -69,6 +78,40 @@ public class HttpClientTest {
         CloseableHttpResponse response = httpClient.execute(get);
         String result = EntityUtils.toString(response.getEntity(), "utf-8");
         System.out.println(result);
+    }
+
+    //post请求application/json
+    @Test
+    public void testpostJson() throws IOException {
+        String url="http://localhost:8080/token";
+        HttpPost post = new HttpPost(url);
+        String jsonStr="{\"userName\":\"Jack\",\"token\":\"Jack3432rtesrdf\"}";
+        StringEntity stringEntity = new StringEntity(jsonStr, "utf-8");
+        post.setEntity(stringEntity);
+        post.setHeader("Content-Type", "application/json");
+        CloseableHttpResponse response = httpClient.execute(post);
+        System.out.println(response.getEntity().getContentType());
+        System.out.println(EntityUtils.toString(response.getEntity()));
+
+    }
+
+    //文件上传
+    @Test
+    public void testUpload() throws IOException {
+        File file = new File("src/main/resources/devops.jpg");
+        String url="http://localhost:8080/file/upload";
+        HttpPost post = new HttpPost(url);
+//        FormBodyPart formBodyPart = new FormBodyPart();
+        HttpEntity httpEntity = MultipartEntityBuilder.create()
+                .addBinaryBody("file",file, ContentType.MULTIPART_FORM_DATA,"devops111.jpg")
+                .addTextBody("userName", "simon")
+                .addTextBody("token", "simon23423test")
+                .build();
+        post.setEntity(httpEntity);
+        CloseableHttpResponse response = httpClient.execute(post);
+        System.out.println(EntityUtils.toString(response.getEntity()));
+        System.out.println(response.getEntity().getContentType());
+
     }
 
 
