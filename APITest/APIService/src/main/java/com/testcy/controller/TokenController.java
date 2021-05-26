@@ -3,6 +3,8 @@ package com.testcy.controller;
 import com.alibaba.fastjson.JSON;
 import com.testcy.bean.Token;
 import com.testcy.service.TokenService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Objects;
 
+@Api(description = "token增删改查接口")
 @Slf4j
 @RestController
 public class TokenController {
@@ -19,6 +22,7 @@ public class TokenController {
     private TokenService tokenService;
 
     //不带参数的get请求
+    @ApiOperation(value = "获取token列表",httpMethod = "GET")
     @GetMapping("/token")
     public List<Token> token() {
 
@@ -28,6 +32,7 @@ public class TokenController {
     }
 
     //带参数的get请求
+    @ApiOperation(value = "根据用户名获取token",httpMethod = "GET")
     @GetMapping("/token/username")
     public Token token(@RequestParam("userName") String userName) {
         log.info("请求进来了。。");
@@ -36,6 +41,7 @@ public class TokenController {
     }
 
     //body为json的post请求
+    @ApiOperation(value = "传入json格式的正文添加token",httpMethod = "POST")
     @PostMapping("/token")
     public String addJsonToken(@RequestBody Token token) {
         if (Objects.isNull(token)) {
@@ -51,6 +57,7 @@ public class TokenController {
 
     //body为key-value的post请求
     @PostMapping("/token/form")
+    @ApiOperation(value = "传入键值对的正文添加token",httpMethod = "POST")
     public String addFormToken(@RequestParam("userName") String username,
                                @RequestParam("token") String token) {
         Token token1 = new Token();

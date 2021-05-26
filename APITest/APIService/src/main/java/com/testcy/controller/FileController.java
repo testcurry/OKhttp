@@ -2,6 +2,8 @@ package com.testcy.controller;
 
 import com.testcy.bean.Token;
 import com.testcy.mapper.TokenMapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,11 +16,13 @@ import java.io.*;
 
 @Slf4j
 @Controller
+@Api(description = "文件上传和下载接口")
 public class FileController {
 
     @Autowired
     private TokenMapper tokenMapper;
 
+    @ApiOperation(value = "文件上传接口",httpMethod = "POST")
     @PostMapping("/file/upload")
     @ResponseBody
     public String uploadFile(@RequestParam("userName") String userName,
@@ -44,6 +48,7 @@ public class FileController {
     //文件下载
     @GetMapping("/file/download")
     @ResponseBody
+    @ApiOperation(value = "文件下载接口",httpMethod = "GET")
     public String download(HttpServletRequest request, HttpServletResponse response) {
         //文件下载相关代码
         String fileName = "devops.jpg";// 设置文件名，根据业务需要替换成要下载的文件名
