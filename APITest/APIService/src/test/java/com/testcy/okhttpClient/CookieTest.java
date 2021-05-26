@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class CookieTest {
 
-    @BeforeEach
+//    @BeforeEach
     public void init(){
         System.setProperty("http.proxyHost", "127.0.0.1");
         System.setProperty("https.proxyHost", "127.0.0.1");

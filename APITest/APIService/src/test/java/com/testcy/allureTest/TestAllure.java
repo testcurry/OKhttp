@@ -29,7 +29,7 @@ public class TestAllure {
         OkHttpClient okHttpClient = new OkHttpClient();
 
         Request request = new Request.Builder()
-                .url("http://192.168.31.38:8080/token/username")
+                .url("http://192.168.31.38:8080/token/username?userName=testops")
                 .get()
                 .build();
         Response response = okHttpClient.newCall(request).execute();
