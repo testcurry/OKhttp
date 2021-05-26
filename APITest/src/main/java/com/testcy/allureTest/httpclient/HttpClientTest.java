@@ -1,4 +1,4 @@
-package com.testcy.httpclient;
+package com.testcy.allureTest.httpclient;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;

@@ -1,6 +1,6 @@
 package com.testcy.controller;
 
-import com.testcy.bean.Token;
+import com.testcy.allureTest.bean.Token;
 import com.testcy.mapper.TokenMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

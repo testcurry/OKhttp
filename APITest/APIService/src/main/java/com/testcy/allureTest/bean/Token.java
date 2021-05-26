@@ -1,4 +1,4 @@
-package com.testcy.bean;
+package com.testcy.allureTest.bean;
 
 import lombok.Data;
 import lombok.ToString;

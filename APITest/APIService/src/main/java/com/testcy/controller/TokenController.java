@@ -1,13 +1,11 @@
 package com.testcy.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.testcy.bean.Token;
+import com.testcy.allureTest.bean.Token;
 import com.testcy.service.TokenService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.testcy.service;
 
-import com.testcy.bean.Token;
+import com.testcy.allureTest.bean.Token;
 import com.testcy.mapper.TokenMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,7 @@
-package com.testcy.okhttpTest;
+package com.testcy.allureTest.okhttpTest;
 
-import com.testcy.utils.JsonUtils;
+import com.sun.istack.internal.NotNull;
 import okhttp3.*;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
@@ -14,7 +13,7 @@ public class OkHttpTest {
 
     //get请求
     @Test
-    public void testOkhttp() throws IOException {
+    void testOkhttp() throws IOException {
         Request request = new Request.Builder()
                 .url("http://localhost:8080/token")
                 .get()
@@ -124,7 +123,7 @@ public class OkHttpTest {
         if (!dir.exists()) {
             dir.mkdir();
         }
-        File file = new File(filePath+fileName);
+        File file = new File(filePath + fileName);
         OutputStream outputStream = new FileOutputStream(file);
         int len;
         byte[] buffer = new byte[1024];

@@ -1,9 +1,7 @@
-package com.testcy.okhttpTest;
+package com.testcy.allureTest.okhttpTest;
 
-import jdk.nashorn.internal.ir.RuntimeNode;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;

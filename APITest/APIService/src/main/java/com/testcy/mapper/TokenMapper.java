@@ -1,6 +1,6 @@
 package com.testcy.mapper;
 
-import com.testcy.bean.Token;
+import com.testcy.allureTest.bean.Token;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;

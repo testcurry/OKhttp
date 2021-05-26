@@ -1,7 +1,5 @@
-package com.testcy.okhttpTest;
+package com.testcy.allureTest.okhttpTest;
 
-import okhttp3.CookieJar;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.junit.jupiter.api.BeforeEach;
