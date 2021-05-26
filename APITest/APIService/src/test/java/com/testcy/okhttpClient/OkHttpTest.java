@@ -3,10 +3,12 @@ package com.testcy.okhttpClient;
 import com.sun.istack.internal.NotNull;
 import okhttp3.*;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.awt.*;
 import java.io.*;
 
+@SpringBootTest
 public class OkHttpTest {
 
     private static final MediaType JSON_MEDIA_TYPE = MediaType.get("application/json;charset=utf-8");
